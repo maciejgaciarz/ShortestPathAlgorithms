@@ -1,0 +1,56 @@
+package com.company;
+
+public class Edge {
+
+    private int id;
+
+    private Vertex source;
+    private Vertex destination;
+
+    private int weight;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Vertex getSource() {
+        return source;
+    }
+
+    public void setSource(Vertex source) {
+        this.source = source;
+    }
+
+    public Vertex getDestination() {
+        return destination;
+    }
+
+    public void setDestination(Vertex destination) {
+        this.destination = destination;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public Edge(int id, Vertex source, Vertex destination, int weight) {
+
+        this.id = id;
+        this.source = source;
+        this.destination = destination;
+        this.weight = weight;
+    }
+
+    @Override
+    public String toString() {
+        return source + " " + destination;
+    }
+}
