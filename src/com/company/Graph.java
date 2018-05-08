@@ -4,28 +4,21 @@ import java.util.List;
 
 public class Graph {
 
-    private List<Vertex> vertices;
+    private final List<Vertex> vertexes;
+    private final List<Edge> edges;
 
-    private List<Edge> edges;
-
-    public Graph(List<Vertex> vertices, List<Edge> edges) {
-        this.vertices = vertices;
+    public Graph(List<Vertex> vertexes, List<Edge> edges) {
+        this.vertexes = vertexes;
         this.edges = edges;
     }
 
-    public List<Vertex> getVertices() {
-        return vertices;
-    }
-
-    public void setVertices(List<Vertex> vertices) {
-        this.vertices = vertices;
+    public List<Vertex> getVertexes() {
+        return vertexes;
     }
 
     public List<Edge> getEdges() {
         return edges;
     }
 
-    public void setEdges(List<Edge> edges) {
-        this.edges = edges;
-    }
+
 }
