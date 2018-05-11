@@ -22,7 +22,7 @@ public class DijkstraTest {
 
         for( int i = 0 ; i < 11; i++)
         {
-            Vertex vertex = new Vertex("Node_" + i,"Node_" + i);
+            Vertex vertex = new Vertex(i," Node");
             nodes.add(vertex);
         }
 
@@ -45,15 +45,22 @@ public class DijkstraTest {
         // Checking from location 1 to location 10
         Graph graph = new Graph(nodes,edges);
         DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
+
         dijkstra.execute(nodes.get(0));
+
+
         LinkedList<Vertex> path = dijkstra.getPath(nodes.get(10));
 
         System.out.println("Shortest path according to Dijkstra is ");
 
         for (Vertex x:path
              ) {
-            System.out.println(x.getName());
+            System.out.println(x.getId() + x.getName());
         }
+        System.out.println("\n");
+
+
+
 
     }
 
