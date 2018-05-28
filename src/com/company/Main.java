@@ -1,38 +1,38 @@
 package com.company;
 
-import java.util.*;
-
 public class Main {
 
     public static void main(String[] args) {
 
-        DijkstraTest DijkstraTest = new DijkstraTest();
+
+        //creating a sample Graph
+        Graph graph = new GraphGenerator().randomGraphGenerator(200,500);
+
+
+        BellmanFordAlgorithm bellmanFordAlgorithm = new BellmanFordAlgorithm();
+        DijkstraAlgorithm dijkstraAlgorithm = new DijkstraAlgorithm(graph);
+
 
 
         double dijkstraStart = System.nanoTime();
-        DijkstraTest.execute();
+        //dijkstra execution
+        dijkstraAlgorithm.execute(graph.getVertexes().get(0));
         double dijkstraEnd = System.nanoTime();
 
 
-        BellmanFordTest BellmanTest = new BellmanFordTest();
-
-        Graph weighted = BellmanTest.createGraph();
-
-        BellmanFordAlgorithm Bellman = new BellmanFordAlgorithm();
-
 
         double bellmanStart = System.nanoTime();
-        Bellman.execute(weighted,0);
+        //bellman execution
+        bellmanFordAlgorithm.execute(graph,0);
         double bellmanEnd = System.nanoTime();
 
 
+        //to get milliseconds
         double dijkstraDuration = (dijkstraEnd - dijkstraStart) / 1000000.0;
         double bellmanDuration = (bellmanEnd - bellmanStart) / 1000000.0;
 
-        System.out.println("Time Dijkstra took to execute: " + dijkstraDuration +" miliseconds");
-        System.out.println("Time Bellman-Ford took to execute: " + bellmanDuration +" miliseconds");
-
-
+        System.out.println("Time Dijkstra took to findPath: " + dijkstraDuration +" miliseconds");
+        System.out.println("Time Bellman-Ford took to findPath: " + bellmanDuration +" miliseconds");
     }
 
 

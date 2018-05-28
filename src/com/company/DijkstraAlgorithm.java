@@ -97,7 +97,7 @@ public class DijkstraAlgorithm {
     }
 
 
-     //This method returns the path from the source to the selected target and NULL if no path exists
+    //This method returns the path from the source to the selected target and NULL if no path exists
 
     public LinkedList<Vertex> getPath(Vertex target) {
         LinkedList<Vertex> path = new LinkedList<Vertex>();
@@ -115,5 +115,31 @@ public class DijkstraAlgorithm {
         Collections.reverse(path);
         return path;
     }
+
+
+    //----ADDED LATER//
+    public void findPath(Graph graph, int startNodeNumber, int endNodeNumber) {
+
+        DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
+
+        dijkstra.execute(graph.getVertexes().get(startNodeNumber));
+
+
+        if (dijkstra.getPath(graph.getVertexes().get(endNodeNumber)) != null) {
+            LinkedList<Vertex> path = dijkstra.getPath(graph.getVertexes().get(endNodeNumber));
+            System.out.println("Shortest path according to Dijkstra is ");
+
+            for (Vertex x : path
+                    ) {
+                System.out.println(x.getName());
+            }
+            System.out.println("\n");
+        } else {
+            System.out.println("path doesn't exist");
+        }
+
+    }
+
+
 
 }
