@@ -49,4 +49,14 @@ public class Edge {
     public String toString() {
         return source + " " + destination;
     }
+
+
+
+    public int getNeighbourIndex(int nodeIndex) {
+        if (source.getId() == nodeIndex) {
+            return this.destination.getId();
+        } else {
+            return this.source.getId();
+        }
+    }
 }

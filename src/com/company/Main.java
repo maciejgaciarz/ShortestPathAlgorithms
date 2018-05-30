@@ -1,40 +1,74 @@
 package com.company;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
+
+            runTests(150);
 
 
-        //creating a sample Graph
-        Graph graph = new GraphGenerator().randomGraphGenerator(200,500);
+
+
+
+    }
+
+
+    static void runTests(int amountOfRuns) throws FileNotFoundException, UnsupportedEncodingException {
+
+        PrintWriter DjikstraWriter = new PrintWriter("resultsDjikstra.txt", "UTF-8");
+        PrintWriter BellmanWriter = new PrintWriter("resultsBellman.txt", "UTF-8");
+
+        double bellmanStart = 0.0;
+        double bellmanEnd = 0.0;
+        double dijkstraStart = 0.0;
+        double dijkstraEnd = 0.0;
+
+
+        //generating wanted graph
+        Graph graph = new GraphGenerator().randomGraphGenerator(50,100);
 
 
         BellmanFordAlgorithm bellmanFordAlgorithm = new BellmanFordAlgorithm();
-        DijkstraAlgorithm dijkstraAlgorithm = new DijkstraAlgorithm(graph);
+        DijkstraAlgorithm dijkstraAlgorithm = new DijkstraAlgorithm();
+
+        for(int i=0;i<amountOfRuns ;i++){
+
+
+            bellmanStart = System.nanoTime();
+            bellmanFordAlgorithm.execute(graph,0);
+            bellmanEnd = System.nanoTime();
+
+
+            dijkstraStart = System.nanoTime();
+            dijkstraAlgorithm.calculateShortestDistances(graph);
+            dijkstraEnd = System.nanoTime();
+
+
+            double bellmanDuration = (bellmanEnd - bellmanStart) / 1000000.0;
+            double dijkstraDuration = (dijkstraEnd - dijkstraStart) / 1000000.0;
+
+            BellmanWriter.println(bellmanDuration);
+            DjikstraWriter.println(dijkstraDuration);
 
 
 
-        double dijkstraStart = System.nanoTime();
-        //dijkstra execution
-        dijkstraAlgorithm.execute(graph.getVertexes().get(0));
-        double dijkstraEnd = System.nanoTime();
+//            System.out.println("Time Dijkstra took to findPath: " + dijkstraDuration +" miliseconds");
+//            System.out.println("Time Bellman-Ford took to findPath: " + bellmanDuration +" miliseconds");
+
+        }
+        System.out.println("amount of vertexes " + graph.getVertexes().size());
+        System.out.println("amount of edges " + graph.getEdges().size());
 
 
-
-        double bellmanStart = System.nanoTime();
-        //bellman execution
-        bellmanFordAlgorithm.execute(graph,0);
-        double bellmanEnd = System.nanoTime();
-
-
-        //to get milliseconds
-        double dijkstraDuration = (dijkstraEnd - dijkstraStart) / 1000000.0;
-        double bellmanDuration = (bellmanEnd - bellmanStart) / 1000000.0;
-
-        System.out.println("Time Dijkstra took to findPath: " + dijkstraDuration +" miliseconds");
-        System.out.println("Time Bellman-Ford took to findPath: " + bellmanDuration +" miliseconds");
+        DjikstraWriter.close();
+        BellmanWriter.close();
     }
 
 
 }
-//Czyli suma stopni wierzchołków w grafie równa się podwojonej ilości krawędzi.

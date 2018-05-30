@@ -24,7 +24,6 @@ public class GraphGenerator {
             Vertex vertex = new Vertex(i,"Node_" + String.valueOf(i));
             nodes.add(vertex);
         }
-        System.out.println("amount of vertexes " + vertexesAmount);
 
 
 
@@ -46,10 +45,11 @@ public class GraphGenerator {
             addLane(nodes,edges,"Edge_"+String.valueOf(i),source,destination,weight);
         }
 
-        System.out.println("amount of edges " + edgesAmount);
 
         return new Graph(nodes, edges);
     }
+
+
 
     private void addLane(List<Vertex> nodes, List<Edge> edges, String laneId, int sourceLocNo, int destLocNo, int weight)
     {
